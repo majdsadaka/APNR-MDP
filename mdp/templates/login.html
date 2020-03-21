@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+  </head>
+  <body>
+    <!-- create a form that sends the information to /login -->
+    <form action="/login" method="POST">
+    <!-- create divs to style in css -->
+    <div class="login">
+    <div class="login-screen">
+    <div class="app-title">
+    <h1>Login</h1>
+    </div>
+    <div class="login-form">
+    <div class="control-group">
+    <!-- the username input -->
+    <input type="text" class="login-form" value="" placeholder="username" name="username">
+    <label class="login-form" for="login-name"></label></div>
+    <div class="control-group">
+    <!-- the password input -->
+    <input type="password" class="login-form" value="" placeholder="password" name="password">
+    <label class="login-form" for="login-pass"></label></div>
+    <input type="submit" value="Log in" class="btn">
+
+    <!-- catch the flash message that comes from the backend -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <p class=flashes>
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% endwith %}
+
+    </div>
+    </div>
+    </div>
+    </form>
+  </body>
+</html>
