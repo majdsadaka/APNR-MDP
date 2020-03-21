@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>Add User</title>
+    <link rel="stylesheet" href="/static/main_style.css" type="text/css">  
+</head>
+<body>
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a class="active" href="/register">Register</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+
+
+    <div class="app-title">
+        <h1>Register Numbers</h1>
+        </div>    
+    <div class="reg-f">
+    <div class="reg-screen">
+    <div class="reg-form">
+    <form action="/save" method="POST">
+        <input type="text" value="" placeholder="First Name" name="Fn">
+        <input type="text" value="" placeholder="Last Name" name="Ln"> 
+        <input type="number" value="" placeholder="Phone Number" name="Pn">
+        <input type="number" value="" placeholder="Car Number" name="CarNumber">
+        <input type="submit" name="Modif" value="Add" class="btn">
+        <input type="submit" name="Modif" value="Del" class="btn">  
+    </form>    
+</div>
+</div>
+</div>
+<div class="reg-t">
+    <div class="reg-screen">
+        <h2>My Registered Numbers</h2>
+    <div class="reg-table">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <p class=flashes>
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </p>
+    {% endif %}
+    {% endwith %}
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Car Numbers.." title="Type in a name">
+<table border="1" id="myTable">
+    <thead>
+        <tr>
+            {% for col in colnames %}
+            <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for num in numbers %}
+        <tr>
+            {% for col in colnames %}
+            <td>{{ records[num][col] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+<script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+</body>
+</html>
